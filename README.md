@@ -1,3 +1,3 @@
-#Fullstackopen osan 3 tehtävät
+# Fullstackopen osan 3 tehtävät
 
-##Sovellus buildattu Fly.ioon, osoitteeseen: https://phonenumberapp.fly.dev/
+## Sovellus buildattu Fly.ioon, osoitteeseen: https://phonenumberapp.fly.dev/
