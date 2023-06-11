@@ -27,7 +27,6 @@ app.use(cors())
 
 
 
-
 //morgan middleware post requestien loggaamiseen
 morgan.token('post-data', (req, res) => {
   const body = req.body //haetaan body
@@ -65,7 +64,6 @@ app.get('/info', (req, res) => {
 })
 
 
-
 //haetaan yksi henkilö id:n perusteella
 app.get('/api/persons/:id', (request, response, next) => { //route, joka palauttaa yhden henkilön id:n perusteella
   Person.findById(request.params.id) //haetaan id
@@ -78,7 +76,6 @@ app.get('/api/persons/:id', (request, response, next) => { //route, joka palautt
     })
     .catch(error => next(error)) //jos tapahtuu virhe, siirrytään errorhandleriin
 })
-
 
 
 //yksittäisen henkilön tietojen poistaminen:
@@ -108,8 +105,6 @@ app.put('/api/persons/:id', (req, res, next) => {
     })
     .catch(error => next(error))
 })
-
-
 
 
 
@@ -143,7 +138,6 @@ app.post('/api/persons', (request, response, next) => {
 
 
 
-
 //middleware, jonka ansiosta saadaan routejen käsittelemättömistä virhetilanteista JSON-muotoinen virheilmoitus
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
@@ -160,7 +154,7 @@ app.use(unknownEndpoint)
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
-  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+  if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
@@ -171,8 +165,6 @@ const errorHandler = (error, request, response, next) => {
 
 // tämä tulee kaikkien muiden middlewarejen rekisteröinnin jälkeen!
 app.use(errorHandler)
-
-
 
 
 
