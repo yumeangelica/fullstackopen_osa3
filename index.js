@@ -25,8 +25,6 @@ const cors = require('cors') //cors middlewaren käyttöön, sallitaan kaikki py
 app.use(cors())
 
 
-
-
 //morgan middleware post requestien loggaamiseen
 morgan.token('post-data', (req, res) => {
   const body = req.body //haetaan body
@@ -36,8 +34,6 @@ morgan.token('post-data', (req, res) => {
 )
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :post-data')) //using morgan middleware, logataan post requestit morganin avulla
-
-
 
 
 //määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen juureen eli polkuun / tulevia HTTP GET -pyyntöjä:
@@ -52,7 +48,6 @@ app.get('/api/persons', (req, res) => {
     res.json(persons)
   })
 })
-
 
 
 // määrittelee info-sivun, missä nykyinen päivämäärä, aika ja henkilöiden määrä näytetään:
@@ -88,7 +83,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
 })
 
 
-
 //henkilön muokkaaminen:
 app.put('/api/persons/:id', (req, res, next) => {
 
@@ -105,7 +99,6 @@ app.put('/api/persons/:id', (req, res, next) => {
     })
     .catch(error => next(error))
 })
-
 
 
 //uuden henkilön lisääminen:
@@ -137,7 +130,6 @@ app.post('/api/persons', (request, response, next) => {
 })
 
 
-
 //middleware, jonka ansiosta saadaan routejen käsittelemättömistä virhetilanteista JSON-muotoinen virheilmoitus
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
@@ -146,8 +138,6 @@ const unknownEndpoint = (request, response) => {
 
 //käytetään middlewarea
 app.use(unknownEndpoint)
-
-
 
 //middleware virheiden käsittelyyn
 
@@ -165,7 +155,6 @@ const errorHandler = (error, request, response, next) => {
 
 // tämä tulee kaikkien muiden middlewarejen rekisteröinnin jälkeen!
 app.use(errorHandler)
-
 
 
 //määritellään portti, jossa sovellus pyörii. Jos ympäristömuuttujassa ei ole porttia, käytetään porttia 3001
